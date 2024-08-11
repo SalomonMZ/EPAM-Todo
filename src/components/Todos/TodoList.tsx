@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import { data } from "../../fixture/data";
 import Todo from "./Todo";
 import type { ITodo } from "./Todo";
+import Loader from "../Loader";
 
 type IData = Omit<ITodo, "dueDate"> & { dueDate: string | null };
 
+const randomTime = Math.floor(Math.random() * (2000 - 500 + 1)) + 500;
+
 const retrieveDataAsync = (): Promise<IData[]> => {
   return new Promise((resolve) => {
-    setTimeout(() => resolve(data), 500);
+    setTimeout(() => resolve(data), randomTime);
   });
 };
 
@@ -35,6 +38,7 @@ const sortByDueDateAndCompletion = (todos: ITodo[]) => {
 
 function TodoList() {
   const [todos, setTodos] = useState<ITodo[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     retrieveDataAsync().then((fetchedTodos) => {
@@ -43,6 +47,7 @@ function TodoList() {
         dueDate: todo.dueDate ? todo.dueDate : "",
       }));
       setTodos(normalizeFetchedTodos);
+      setIsLoading(false);
     });
   }, []);
 
@@ -56,6 +61,10 @@ function TodoList() {
   };
 
   const sortedTodos = sortByDueDateAndCompletion(todos);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <>
