@@ -30,12 +30,12 @@ function Todo({
     <li
       className={`mt-2 flex justify-between items-center ${
         isComplete
-          ? "bg-green-300"
+          ? "bg-[#00FF0033]"
           : dueDate
           ? isOverDue(dueDate)
-            ? "bg-red-300"
-            : "bg-gray-200"
-          : "bg-gray-200"
+            ? "bg-[#FF000033]"
+            : "bg-[#C4C4C433]"
+          : "bg-[#C4C4C433]"
       }`}
     >
       <div className="flex items-center">
@@ -46,12 +46,12 @@ function Todo({
           onChange={() => handleOnChange(id)}
           className="m-2"
         />
-        <label htmlFor="description" className="mr-2">
+        <label htmlFor="description" className="mr-2 text-lg font-display">
           {description}
         </label>
       </div>
       <p
-        className={`w-32 m-1 flex justify-center items-center ${
+        className={`w-32 m-1 text-lg font-display flex justify-center items-center ${
           dueDate ? "border-2" : ""
         } border-solid border-black`}
       >

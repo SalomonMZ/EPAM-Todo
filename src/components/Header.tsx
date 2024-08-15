@@ -1,6 +1,6 @@
 function Header() {
   return (
-    <header className="bg-sky-950 text-white font-primary p-5">
+    <header className="bg-[#383E54] text-lg text-white font-display font-primary p-5">
       <p>Todo App</p>
     </header>
   );
